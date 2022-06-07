@@ -2,8 +2,6 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { api } from '../services/Api'
 
-
-
 // /movie/now_playing?api_key=c879529cb175ed099303c511c453701d&language=pt-BR
 export function Home() {
   const [filmes, setFilmes] = useState([])
@@ -23,14 +21,15 @@ export function Home() {
     }
     loadFilmes()
     setLoading(false)
-   
   }, [])
-  
- 
-  if(loading) {
+
+  if (loading) {
     return (
-      <div className='flex justify-center items-center mt-4 '>
-        <h2 className=' flex flex-center items-center font-bold text-xl'>  carregando filme...</h2>
+      <div className="flex justify-center items-center mt-4 ">
+        <h2 className=" flex flex-center items-center font-bold text-xl">
+          {' '}
+          carregando filme...
+        </h2>
       </div>
     )
   }
