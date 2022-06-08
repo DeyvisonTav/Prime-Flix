@@ -47,12 +47,12 @@ export function Home() {
                 {filme.title}
               </strong>
               <img
-                className="snap-center w-auto rounded-xl rounded-b-none "
+                className="snap-center md:h-screen w-full rounded-xl rounded-b-none "
                 src={`https://image.tmdb.org/t/p/original/${filme.poster_path}`}
                 alt={filme.title}
               />
               <Link
-                className="snap-center flex items-center justify-center md:py-4 py-1 text-white rounded-xl rounded-t-none bg-black pointer hover:bg-zinc-800"
+                className="w- snap-center flex items-center justify-center md:py-4 py-1 text-white rounded-xl rounded-t-none bg-black pointer hover:bg-zinc-800"
                 to={`/filme/${filme.id}`}
               >
                 Acessar
