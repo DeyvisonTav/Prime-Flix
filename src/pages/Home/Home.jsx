@@ -40,19 +40,19 @@ export function Home() {
         {filmes.map(filme => {
           return (
             <article
-              className=" mt-4 md:w-full w-80 bg-white p-12 rounded-xl shadow-2xl shadow-black border-8 border-white"
+              className=" snap-snap-proximity snap-y mt-4 md:w-full w-80 bg-white p-12 rounded-xl shadow-2xl shadow-black border-8 border-white"
               key={filme.id}
             >
-              <strong className="mb-4 text-center md:text-2xl text-lg font-bold block">
+              <strong className="snap-center mb-4 text-center md:text-2xl text-lg font-bold block">
                 {filme.title}
               </strong>
               <img
-                className="w-auto rounded-xl rounded-b-none "
+                className="snap-center w-auto rounded-xl rounded-b-none "
                 src={`https://image.tmdb.org/t/p/original/${filme.poster_path}`}
                 alt={filme.title}
               />
               <Link
-                className="flex items-center justify-center md:py-4 py-1 text-white rounded-xl rounded-t-none bg-black pointer hover:bg-zinc-800"
+                className="snap-center flex items-center justify-center md:py-4 py-1 text-white rounded-xl rounded-t-none bg-black pointer hover:bg-zinc-800"
                 to={`/filme/${filme.id}`}
               >
                 Acessar
