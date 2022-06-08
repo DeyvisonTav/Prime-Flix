@@ -1,9 +1,10 @@
-import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useEffect, useState, } from 'react'
+import { useParams, useNavigate } from 'react-router-dom'
 import { api } from '../services/Api'
 
 export function Filme() {
   const { id } = useParams()
+  const navegation = useNavigate()
   const [filme, setFilmes] = useState({})
   const [loading, setLoading] = useState(true)
   useEffect(() => {
@@ -19,12 +20,30 @@ export function Filme() {
           setFilmes(response.data)
           setLoading(false)
         })
-        .catch(error => {})
+        .catch(() => {
+          navegation('/',{replace:true})
+          return;
+        })
     }
     loadFilme()
     return () => {}
-  }, [])
+  }, [navegation, id ])
 
+  function salvarFilme() {
+    const minhaLista = localStorage.getItem('@primeFlix')
+
+    let filmesSalvos = JSON.parse(minhaLista) || [];
+
+    const hasFilme = filmesSalvos.some((filmeSalvo)=> filmeSalvo.id === filme.id)
+     
+    if(hasFilme) {
+       alert('ESSE FILME JÁ ESTÁ NA LISTA!')
+      return;
+     }
+    filmesSalvos.push(filme)
+    localStorage.setItem('@primeFlix',JSON.stringify(filmesSalvos))
+    alert('FILME SALVO COM SUCESSO!')
+  }
   if (loading) {
     return (
       <div className="flex justify-center items-center mt-4 ">
@@ -32,6 +51,9 @@ export function Filme() {
       </div>
     )
   }
+  
+  
+
 
   return (
     <div className="max-w-4xl m-2  snap-snap-proximity snap-y mt-4 md:w-full w-96 bg-white p-12 rounded-xl shadow-2xl shadow-black border-8 border-white">
@@ -52,15 +74,19 @@ export function Filme() {
       <div>
         <strong className="md:px-3 px-1 md:text-lg text-base  underline font-bold">
           avaliação: {filme.vote_average} /10
-        </strong>{' '}
+        </strong>
       </div>
 
       <div className="mt-6 flex flex-center justify-center  md:space-x-3 space-x-2 ">
-        <button className="snap-center flex items-center justify-center md:py-3 py-1 md:px-10 px-5 text-white rounded-xl md:text-lg text-sm  bg-black pointer hover:bg-zinc-800 transition-colors">
+        <button
+        onClick={()=> salvarFilme()}
+        className="snap-center flex items-center justify-center md:py-2 py-1 md:px-10 px-5 text-white rounded-xl md:text-lg text-sm  bg-black pointer hover:bg-zinc-800 transition-colors"
+        
+        >         
           Salvar
         </button>
-        <button className="snap-center flex items-center justify-center md:py-3 py-1 md:px-10 px-5 text-white rounded-xl text-sm bg-black pointer hover:bg-zinc-800 transition-colors">
-          <a href="#">Trailer</a>
+        <button className="snap-center flex items-center justify-center md:py-2 py-1 md:px-10 px-5 text-white rounded-xl md:text-lg text-sm bg-black pointer hover:bg-zinc-800 transition-colors">
+          <a target='blanck' rel='external' href={`https://youtube.com/results?search_query=${filme.title} trailer`}>Trailer</a>
         </button>
       </div>
     </div>
