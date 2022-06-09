@@ -2,8 +2,10 @@ import { Link } from 'react-router-dom'
 
 export function Header() {
   return (
-    <div>
-      <div className='flex items-center justify-around w-screen h-16 bg-black'>
+    <div >
+      <div 
+      
+      className=' flex items-center justify-around w-screen h-16 bg-black  '>
         <Link 
         className='text-white text-4xl pointer font-bold'
         to={'/'}>primeFlix</Link>
